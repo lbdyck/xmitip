@@ -1,0 +1,27 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
++ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(60,18) Expand(\\)
+%\-\-~XMITIP Message Dataset%-\-\
++
++The message dataset defines a text dataset which contains
++text that will be included in the e-mail as the message.
++
++Valid options are:
++
+`*+           - used when under ISPF to dynamically create
++               and edit a message.
+`?+           - used when under ISPF to popup a panel to
++               enter text when the Subject is PAGE
+`dataset name+- any sequential dataset or PDS member.
+`DD:ddname   +- DD for any sequential dataset or PDS member.
+`short msg   +- a short message (e.g. Please call me)
+`omvs.file   +- any omvs file (e.g. '/u/userid/file')
+             +  (case is important for these file names)
+`HTML        +- same as~*+but will define as rich text.
+`HTML:smsg   +- same as short message but in html format.
+)Init
+ &zup = xmitiph0
+)End

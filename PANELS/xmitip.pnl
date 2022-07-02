@@ -1,0 +1,96 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type( input) intens(high) caps(off) just(left )
+   % type(text) intens(high)
+   # type(text) intens(high) color(white)
+   + type(text) color(turq)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   @ type(output) intens(high) color(turq) just(right)
+)Body Expand(\\)
+%\-\-~E-Mail Dialog @ver     %-\-\
+%Command ===>_Zcmd
++
+#To Address  %===>_to                                                          +
++CC Address  %===>_cc                                                          +
++BCC Address %===>_bcc                                                         +
++AddressFile %===>$addrfile                                                   +
+#Subject+    %===>_subject
++
+#Message/DS/DD/*/?  %===>_msgds                                                +
++Edit Message DSN   %===>_emsg+     %Yes+or%No+
+#
+#Attachment DSN/DD/?%===>_file                                          +
++File Name in e-Mail%===>`filename                                      +
++Format (?=prompt)  %===>_format                                              +
++         Settings  %===>_attset+   %Yes+or%No+
++
++Configuration File %===>$configds                                         +
++Default Settings   %===>_personal+ %Yes+or%No+to set From, ReplyTo, etc.
++Delivery Settings  %===>_mset+     %Yes+or%No+(FollowUp, Import, Prior, Sens,
++                                    Respond, StartTLS, and SMTPDest)
+#Execution Mode     %===>_execmode+ %I+ISPF%B+Batch%C+Config%P+Prompt%D+Debug
++
++                ~Field level help available via PF1+
+)Init
+ .cursor = zcmd
+ .help   = xmitiph0
+ &execmode = trans(&execmode &z,ISPF *,*)
+ &attset = trans(trunc(&attset,1) y,Yes n,&z Y,Yes N,No *,*)
+ &mset = trans(trunc(&mset,1) y,Yes n,&z Y,Yes N,No *,*)
+)Proc
+ ver (&to,nb)
+ if (&msgds = *)
+     &emsg = &z
+ &tpage = trans(&subject page,PAGE Page,PAGE *,*)
+ if (&tpage EQ PAGE)
+    ver (&msgds,nb)
+ &personal = trans(trunc(&personal,1) y,Yes n,&z Y,Yes N,No *,*)
+ ver (&personal,list,Yes)
+ if (&addrfile NE &Z)
+    ver (&addrfile,dsnamepq)
+ &execmode = trans(trunc(&execmode,1)
+             I,ISPF i,ISPF
+             C,Config
+             c,Config
+             B,Batch
+             b,Batch
+             D,Debug
+             d,Debug
+             P,Prompt
+             p,Prompt
+             &z,ISPF
+             *,*)
+ ver (&execmode,nb,list,ISPF,Batch,Debug,Prompt,Config)
+ if (&execmode = Config)
+     ver (&configds,nb,dsnamepq)
+ if (&configds EQ &z)
+    if (&msgds EQ &z)
+       ver (&file,nb)
+ if (&execmode EQ Batch)
+    if (&msgds = *)
+       ver (&msgds,list,'NoAsterisk')
+ &emsg   = trans(trunc(&emsg,1) y,Yes Y,Yes n,&z N,&z *,*)
+ ver (&emsg,list,Yes,No,&z)
+ &attset = trans(trunc(&attset,1) y,Yes Y,Yes n,No N,No *,*)
+ ver (&attset,list,Yes,No,&z)
+ &mset = trans(trunc(&mset,1) y,Yes n,&z Y,Yes N,No *,*)
+ ver (&mset,list,Yes,No,&z)
+)Help
+ Field(addrfile) panel(xmitipxc)
+ Field(attset)   panel(xmitipxt)
+ Field(bcc)      panel(xmitipx5)
+ Field(cc)       panel(xmitipx4)
+ Field(configds) panel(xmitipxo)
+ Field(emsg)     panel(xmitipxl)
+ Field(execmode) panel(xmitipxp)
+ Field(file)     panel(xmitipxa)
+ Field(filename) panel(xmitipxj)
+ Field(format)   panel(xmitipxh)
+ Field(mset)     panel(xmitipxr)
+ Field(msgds)    panel(xmitipx2)
+ Field(personal) panel(xmitipxs)
+ Field(subject)  panel(xmitipx3)
+ Field(to)       panel(xmitipx1)
+)End

@@ -1,0 +1,21 @@
+)Attr Default(%+_)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\)
+%\-\-~XMITIP Calendar File Prompt%-\-\
+%Command:%===>_zcmd
++
+%    Enter/Verify the name of the iCalendar Data Set and File
+%
+%    iCalender data set: _icalds                                             +
+%    (will be created if it doesn't exist)
+%
+%    iCalender file:     _icalfile                      +
+%    (the file attachment name)
++
+)INIT
+ .cursor = icalds
+)PROC
+  ver (&icalds,nb,dsnameq)
+  ver (&icalfile,nb,dsnameq)
+)END

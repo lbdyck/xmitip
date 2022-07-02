@@ -1,0 +1,61 @@
+)Panel Keylist(ISPHelp,ISP)
+)Attr Default(%`_)
+/* _ type( input) intens(high) caps(on ) just(left )               */
+   @ type( input) intens(high) caps(on ) just(left ) pad('_') color(turq)
+   ! type(output) intens(high) caps(off) just(asis ) color(white)
+   ~ type(text) intens(high) caps(off) just(asis ) color(turq)
+   % type(text) intens(high)
+   # area(SCRL) Extend(ON)
+)Body  Expand(//)
+%-/-/- ~XMITIP E-Mail Address Help% -/-/-
+%Command ===>_zcmd
+%
+`                                                                %Up F10 Dn F11
+#help -------------------------------------------------------------------------#
+)Area Help
+`  This table allows you to enter as many e-mail addresses as you like.
+`  All addresses specified are remembered so from this address book you
+`  can select one or more addresses to receive your e-mail.
+`
+`  Valid Commands are:
+`
+~  Cancel`      Cancels the current XMITIP session
+`
+~  Find`        find the character sting entered
+`
+~  Insert`      Inserts a blank row and positions the cursor on that row.
+`
+~  SaveAf`      Save the selected addresses into an AddressFile data set.
+`
+~  Sort`        Sort by~Mail`or~Name`with~Name`the default.
+`
+~  LoadAf`      Load an existing AddressFile data set into this table.
+`
+`  Valid Line options are:
+`
+~  S`           Select the current address to be a primary TO recipient
+`               If an AddressFile then select it for use
+`
+~  C`           Select the current address to be a Carbon Copy recipient
+`
+~  B`           Select the current address to be a Blind Carbon Copy recipient
+`               If an AddressFile then Browse it
+`
+~  E`           Edit the AddressFile (should do a L afterwards)
+`
+~  U`           UnSelect the current address
+`
+~  D`           Delete the current address from the table
+`               If an AddressFile then Delete the entry (not the data set)
+`
+~  I`           Insert a new address
+`
+~  L`           Load an AddressFile (distribution list)
+`
+~  R`           Displays a panel to Revise the current address
+`               If an AddressFile then Revise Description
+` ~
+)Init
+  .cursor = zcmd
+)Proc
+)end

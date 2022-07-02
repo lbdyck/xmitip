@@ -1,0 +1,21 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(62,14) Expand(\\)
+%\-\-~XMITIP Attachment DSN%-\-\
++
+~This is any sequential dataset, DD, PDS member, or HFS file
+~that will be inserted into the e-mail as an attachment.
++
+~Valid options are:
++
+`sequential-dataset-name~or`dsname(member)
+~or`DD:ddname+
+~or`hfs-filename~(e.g. '/home/userid/filename.txt')+
+`?~ will bring up the file attachment dialog
++
+~A message or a file is required.
+)Init
+ &zup = xmitiph0
+)End

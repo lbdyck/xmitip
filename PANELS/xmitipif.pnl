@@ -1,0 +1,50 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type(output) intens(high) caps(on ) just(left ) color(turq)
+   ^ type(output) intens(high) caps(off) just(left ) color(turq)
+   ` type( input) intens(high) caps(off) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   @ type(output) intens(high) color(turq) just(right)
+)Body Expand(\\) Window(77,15)
+%-\-\- ~E-Mail Attachment Details%-\-\-
+%Command ===>_Zcmd
++
++For Dataset:$file
++
++Attachment Desc  %===>`filedesc                                            +
++ZIP Settings     %===>`zipset+    Yes, No, or Never
++No Carriage Control          %===>_ignorecc+     Yes or No (default=No)
++Do NOT Strip Trailing Blanks %===>_nostrip+      Yes or No (default=No)
++Ignore Filename Suffix       %===>_ignoresf+     Yes or No (default=No)
++
++Margins - in units of^measure
++   Left%===>_left  +Right %===>_right +
++   Top %===>_top   +Bottom%===>_bottom+
++\ \ ~Review/Verify then use PF3 to continue+ \ \
+)Init
+ .cursor = zcmd
+ .help   = xmitipxv
+ &zipset = trans(trunc(&zipset,2) Ye,Yes YE,Yes ye,Yes no,No NO,No
+                               ne,Never Ne,Never &z,No)
+ &ignorecc = trans(trunc(&ignorecc,1) Y,Yes y,Yes n,No N,No &z,No)
+ &nostrip = trans(trunc(&nostrip,1) Y,Yes y,Yes n,No N,No &z,No)
+ &ignoresf = trans(trunc(&ignoresf,1) Y,Yes y,Yes n,No N,No &z,No)
+)Proc
+ &zipset = trans(trunc(&zipset,2) Ye,Yes YE,Yes no,No NO,No ye,Yes
+           ne,Never Ne,Never &z,No *,*)
+ ver(&zipset,nb,list,Yes,No,Never)
+ &ignorecc = trans(trunc(&ignorecc,1) Y,Yes y,Yes n,No N,No &z,No *,*)
+ ver(&ignorecc,nb,list,Yes,No)
+ &nostrip = trans(trunc(&nostrip,1) Y,Yes y,Yes n,No N,No &z,No *,*)
+ ver(&nostrip,nb,list,Yes,No)
+ &ignoresf = trans(trunc(&ignoresf,1) Y,Yes y,Yes n,No N,No &z,No *,*)
+ ver(&ignoresf,nb,list,Yes,No)
+)Help
+ Field(filedesc) panel(xmitipxb)
+ Field(zipset)   panel(xmitipxz)
+ Field(ignorecc) panel(xmitipxn)
+ Field(ignoresf) panel(xmitipxy)
+ Field(nostrip)  panel(xmitipxw)
+)End

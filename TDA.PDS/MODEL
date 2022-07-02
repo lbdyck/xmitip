@@ -1,0 +1,11 @@
+Day-of-Week (Monday Tuesday...) and/or day-of-month 5 15 25
+Contact information for this timed delivery
+Subject: subject for the e-mail - supports xmitip symbolics
+data set with xmitip address file (to/cc/bcc)
+data set with message text
+from or reply-to e-mail address
+* Any record after the 6th record is ignore so may be used for
+* comments
+
+A suggestion for records 4 and 5 is to make these also members
+of this pds but NOT with a TD prefix

@@ -1,0 +1,120 @@
+)MSG  EZA54*
+/*
+* Name: MSG.EZA54                                                       00030000
+*                                                                       00040000
+* Description: OPSMVS message rule to process EZA54 prefixed messages   00050000
+*              from the MVS SMTP server                                 00060000
+*                                                                       00060000
+* Author: Paul Wells                                                    00070000
+*         Ladbroke Racing (UK) Ltd                                      00080000
+*         Imperial House                                                00080000
+*         Imperial Drive                                                00080000
+*         Rayners Lane                                                  00080000
+*         HARROWW                                                       00080000
+*         Middlesex                                                     00080000
+*         HA2 7JW                                                       00080000
+*         UK                                                            00080000
+* Tel: +44 20 8515 5224                                                 00080000
+* Email: paul.wells@ladbrokes.co.uk                                     00080000
+*                                                                       00080000
+* Purpose                                                               00160000
+* -------                                                               00170000
+*                                                                       00180000
+* EZA54 prefixed messages from the MVS SMTP server are processed to     00190000
+* build a notify for the TSO user when a inbound email is received.     00200000
+* By using OPSMVS global variables to track the internal SMTP note      00210000
+* number, the notify message will usually contain the email address     00220000
+* of the sender. e.g.                                                   00220000
+*                                                                       00220000
+*  SE '12:59:32 2000/02/22 mail received from paul.wells@ladbrokes.co.uk00220000
+*  ',LOGON,USER=(DT6)                                                   00220000
+*                                                                       00490000
+* Installation                                                          00500000
+* ------------                                                          00510000
+*                                                                       00520000
+* The JCL of MVS SMTP server must be modified to route its LOGILFE      00530000
+* to OPSMVS via the generic dataset interface. .e.g.                    00540000
+*                                                                       01150000
+*  //LOGFILE  DD SUBSYS=(OPSS,OPSDSN,PINK,SMTP)                         01150000
+*                                                                       01150000
+* In the above example OPSS is the OPSMVS subsystem, OPSDSN is the      01150000
+* trigger for the generic dataset interface, PINK is colour for         01150000
+* messages in the OPSLOG, and SMTP is the report id available to        01150000
+* message rules.                                                        01150000
+*                                                                       01150000
+* This member should be enabled and auto-enabled in an OPSMVS           01150000
+* rule dataset.                                                         01150000
+*/
+)PROC
+
+ if MSG.REPORTID ^= "SMTP" then return /* expecting messages via
+                                          generic dataset interface
+                                          only */
+ lclnode = opsinfo("ORIGINNODE")       /* local JES node */
+ dt = date("S")
+ dtout = left(dt,4)"/"substr(dt,5,2)"/"right(dt,2)
+ stem = "GLVTEMP9.SMTP"                /* base stem for gvars */
+
+ select
+
+/*EZA5474I 02/17/00 08:04:45 Received Note 00000002 via BSMTP From <SMPH
+OLD@SPRO.ladbrokes.co.uk> 1256 Bytes*/
+   when MSG.ID = "EZA5474I" then do
+
+     noteno = word(MSG.TEXT,6)         /* note number */
+     gvar = stem"."noteno".emailfrom"  /* gvar name */
+     emailfrom = strip(translate(word(MSG.TEXT,10)," ","<>"))
+                                       /* strip chevrons */
+     rtvl = opsvalue(gvar,"U",emailfrom) /* update gvar */
+
+   end
+
+/*EZA5475I 02/17/00 16:06:22 Received Note 00000005 via TCP (0) From <@
+ukprod.ladbrokes.co.uk:paul.wells@ladbrokes.co.uk> 622 Bytes*/
+   when MSG.ID = "EZA5475I" then do
+
+     noteno = word(MSG.TEXT,6)         /* note number */
+     gvar = stem"."noteno".emailfrom"  /* gvar name */
+     emailfrom = strip(translate(word(MSG.TEXT,11)," ","<>"))
+                                       /* strip chevrons */
+     if abbrev(emailfrom,"@") & pos(":",emailfrom) > 0 then ,
+      parse var emailfrom ":" emailfrom
+                                       /* strip domain name */
+     rtvl = opsvalue(gvar,"U",emailfrom) /* update gvar */
+
+   end
+
+/*EZA5476I 02/17/00 16:06:26 Delivered Note 00000005 to DT6 at A09JES2*/
+   when MSG.ID = "EZA5476I" then do
+
+     noteno = word(MSG.TEXT,6)         /* note number */
+     gvar = stem"."noteno".emailfrom"  /* gvar name */
+     emailfrom = opsvalue(gvar,"V")    /* get gvar */
+     if emailfrom = gvar then emailfrom = "unknown"
+                                       /* if uninit then sender
+                                          is unknown */
+     tsouser = word(MSG.TEXT,8)        /* get TSO userid */
+     mailnode = word(MSG.TEXT,10)      /* get mail node */
+
+     if mailnode = lclnode then do     /* local node ? */
+
+       cmdtext = time() dtout" mail received from "emailfrom
+       if length(cmdtext) > 99 then cmdtext = left(cmdtext,99)
+                                       /* ensure max MVS command
+                                          length not exceeded */
+       address OPER
+       "SE '"cmdtext"',LOGON,USER=("tsouser")" /* issue TSO send */
+
+     end
+
+     rtvl = opsvalue(gvar,"R")       /* delete gvar */
+
+   end
+
+   otherwise NOP                       /* ignore other messages */
+
+ end
+
+return
+
+

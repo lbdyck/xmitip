@@ -1,0 +1,45 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(blue)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+)Body Expand(\\) window(72,17)
+%\-\-~Format PDF Prompt%-\-\
+%Command ===>_Zcmd
+`Enter/Verify
++
+` Layout          %===>_playout    +      Portrait or Landscape
+` Font size       %===>_pfont+            default is&df  (72 = 1 inch)
++                                         use sizeB for bold (9B)
+` Paper           %===>_ppaper+           Letter, Legal, A4 or nnxyy
+` LPI             %===>_plpi+             Lines per inch (default&dl)
++ Margins - in units of^measure
++   Left%===>_left  +Right %===>_right +
++   Top %===>_top   +Bottom%===>_bottom+
++ PDF Index       %===>_pindex          + row/column/length
+` RPO             %===>_psec            + Security (40, 128, or no)
++                                         or 40:userpw 128:userpw
+` Or TXT2PDF Configuration File:        +Create using TXT2PDF Dialog
+  %===> $t2pconf                                          +
+)Init
+ .cursor = playout
+ .help   = xmitiph4
+ &df = &dfsize
+ &dl = &deflpi
+ if (&metric EQ 'C')
+    &measure = Centimeters
+ if (&metric EQ 'I')
+    &measure = Inches
+)Proc
+ &playout = trans(trunc(&playout,1)
+            p,Portrait P,Portrait
+            l,Landscape L,Landscape *,*)
+ if (&t2pconf = &z)
+    ver (&playout,nb,list,Portrait,Landscape)
+ if (&t2pconf NE ?)
+    ver (&t2pconf,dsnameq)
+ VPut (left right top bottom)
+)End

@@ -1,0 +1,45 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(blue)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\) window(74,22)
+%\-\-~Format HTML Prompt%-\-\
+%Command ===>_Zcmd
+`Enter/Verify
++
+` Background Color%===>_bcolor     + see color
+` Text Color      %===>_tcolor     +     chart below
+` Font Size       %===>_hfsize   +   1 to 7 or null
+` Banner          %===>_hban+        Yes or No
+` Table           %===>_htbl+        Yes or No for CSV to HTML Table
+` Header Row      %===>_hhead+       Yes or No for CSV header row
+` Wrap            %===>_hwrap+       Yes or No to wrap text in table cell
+` Semicolon       %===>_hsemi+       Yes or No to use ; instead of ,
++
+` Or TXT2HTML Configuration File:       +
+  %===> $t2hconf                                          +
+
++ ~Color+    ~Abb+ ~Color+    ~Abb+   ~Color+   ~Abb+   ~Color+   ~Abb+
+`  Aqua       A     Gray       Gra     Navy      N       Silver    S
+`  Black      Bla   Green      Gre     Olive     O       Teal      T
+`  Blue       Blu   Lime       L       Purple    P       White     W
+`  Fuchsia    F     Maroon     M       Red       R       Yellow    Y
+)Init
+ .cursor = bcolor
+)Proc
+ ver (&hfsize,range,1,7)
+ &hban = trans(trunc(&hban,1) y,Yes Y,Yes n,No N,No *,*)
+ &htbl = trans(trunc(&htbl,1) y,Yes Y,Yes n,No N,No *,*)
+ &hhead = trans(trunc(&hhead,1) y,Yes Y,Yes n,No N,No *,*)
+ &hwrap = trans(trunc(&hwrap,1) y,Yes Y,Yes n,No N,No *,*)
+ &hsemi = trans(trunc(&hsemi,1) y,Yes Y,Yes n,No N,No *,*)
+ ver (&hban,list,Yes,No)
+ ver (&htbl,list,Yes,No)
+ ver (&hhead,list,Yes,No)
+ ver (&hwrap,list,Yes,No)
+ ver (&hsemi,list,Yes,No)
+ ver (&t2hconf,dsnameq)
+)End

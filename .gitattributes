@@ -28,3 +28,6 @@
 *.xlsm binary
 *.obj binary
 *.bin binary
+LOAD/* git-encoding=BINARY zos-working-tree-encoding=BINARY binary
+UDSMTPS.TAR.GZ git-encoding=BINARY zos-working-tree-encoding=BINARY binary
+PDS/TEST$GIF git-encoding=BINARY zos-working-tree-encoding=BINARY binary

@@ -1,0 +1,42 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type(output) intens(low ) caps(off) just(left )
+   ` type( input) intens(high) caps(on ) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   @ type(output) intens(high) color(turq) just(right)
+)Body Expand(\\) Window(76,14)
+%\-\-~E-Mail Settings%-\-\
+%Command ===>_Zcmd
++
++Importance     %===>_import           + High, Normal, Low
++Priority       %===>_prior            + Urgent, Non-Urgent, Normal
++Sensitivity    %===>_sens             + PRivate, PErsonal,
++                                        CONfidential, COMpany
++StartTLS       %===>_stls             + Secure SMTP Connection (On,Off)
++SMTPDest       %===>`smtpdest         + Over-ride Dest (node.dest or dest)
++Followup Date: %===>_fupdate+           mmddyy or$pnn (nn days from today)
++
++Respond %===>_respond                                                 +
++
++\ \ ~Review/Verify then press Enter to continue+ \ \
+)Init
+ .cursor = zcmd
+ .help   = xmitipxr
+ &pnn = +nn
+)Proc
+ &x = trunc(&fupdate,1)
+ if (&x NE +)
+     ver (&fupdate,pict,nnnnnn)
+ ver (&stls,list,on,off,ON,OFF,On,Off)
+ ver (&smtpdest,dsname)
+)Help
+ Field(import)   panel(xmitipxe)
+ Field(prior)    panel(xmitipxf)
+ Field(sens)     panel(xmitipxg)
+ Field(stls)     panel(xmitipyc)
+ Field(fupdate)  panel(xmitipxq)
+ Field(respond)  panel(xmitipx0)
+ Field(smtpdest) panel(xmitipye)
+)End

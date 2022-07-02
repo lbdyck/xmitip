@@ -1,0 +1,48 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type( input) intens(high) caps(off) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   @ type(output) intens(high) color(turq) just(right)
+)Body Window(72,13) Expand(\\)
+%\-\-~E-Mail Settings%-\-\
+%Command ===>_Zcmd
++
++From Address     %===>_from
++Reply-To Address %===>_replyto
++Receipt Address  %===>_receipt
++Signature DSN    %===>$sigdsn                                        +
++Text Page Length %===>$pageleno+     Text Page Length
++Max Size Limit   %===>$xsizelim   +  Mail size limit in bytes
++Murphy           %===>_mur+          Yes or No
++Quiet Mode       %===>_quiet+        Yes or No for ISPF Dialog
++
++\ \ ~Review/Verify then use PF3 to continue+ \ \
+)Init
+ .cursor = zcmd
+ .help = xmitipxs
+ &mur = trans(trunc(&mur,1) Y,Yes y,Yes n,&z N,&z *,*)
+ &quiet = trans(trunc(&quiet,1) Y,Yes y,Yes n,No N,No &z,No)
+)Proc
+ if (&ispffrom = 1)
+    ver (&from,nb)
+ if (&sigdsn NE &Z)
+    ver (&sigdsn,dsnameq)
+ ver (&pageleno,num)
+ &mur = trans(trunc(&mur,1) Y,Yes y,Yes n,&z N,&z *,*)
+ ver (&mur,list,Yes)
+ &quiet = trans(trunc(&quiet,1) Y,Yes y,Yes n,No N,No &z,No)
+ ver (&quiet,nb,list,Yes,No)
+ ver (&xsizelim,num)
+)Help
+ Field(from)     panel(xmitipx6)
+ Field(replyto)  panel(xmitipx7)
+ Field(receipt)  panel(xmitipx8)
+ Field(sigdsn)   panel(xmitipx9)
+ Field(mur)      panel(xmitipxd)
+ Field(pageleno) panel(xmitipya)
+ Field(xsizelim) panel(xmitipyd)
+ Field(quiet)    panel(xmitipyb)
+)End

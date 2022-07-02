@@ -1,0 +1,18 @@
+)Attr Default(%+_)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\)
+%-\-\- ~E-Mail JOB Statements %-\-\-
+%Command:%===>_zcmd
++
++    Update/Change the JOB Statements
++
++ ===>_zxjc1
++ ===>_zxjc2
++ ===>_zxjc3
++ ===>_zxjc4
++
++     Press PF3 to register changes or Cancel to quit without changes
+)init
+)proc
+)end

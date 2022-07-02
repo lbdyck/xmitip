@@ -1,0 +1,69 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(blue)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\) window(69,19)
+%\-\-~Format Prompt Selection%-\-\
+%Command ===>_Zcmd
+
+`Check the format desired for additional prompting (if available)
+
+`Format Binary:   %===>$fb +            `Format ZIP:      %===>$fz +
+`Format CSV:      %===>$fc +            `Format ZIPBIN:   %===>$fbz+
+`Format GIF:      %===>$fg +            `Format ZIPCSV:   %===>$fcz+
+`Format HTML:     %===>$fh +            `Format ZIPGIF:   %===>$fgz+
+`Format ICAL      %===>$fic+            `Format ZIPHTML:  %===>$fhz+
+`Format PDF:      %===>$fp +            `Format ZIPPDF:   %===>$fpz+
+`Format RTF:      %===>$fr +            `Format ZIPRTF:   %===>$frz+
+`Format Text:     %===>$ft +            `Format ZIPXMIT   %===>$fzz+
+`Format XMIT      %===>$fx +
+`
+`Only select one format.
++
+`You can use a single FORMAT for all file attachments by adding an~*`
+`before the format type (e.g. *RTF) on the XMITIP Panel.
+)Init
+ .cursor = zcmd
+ .help   = XMITIPXH
+ &ft = &z
+ &fb = &z
+ &fc = &z
+ &fg = &z
+ &fx = &z
+ &fh = &z
+ &fic = &z
+ &fr = &z
+ &fp = &z
+ &fz = &z
+ &fbz = &z
+ &fhz = &z
+ &fpz = &z
+ &frz = &z
+ &fzz = &z
+ &frc = &z
+ &frg = &z
+ &frx = &z
+)Proc
+ If (&ft EQ &Z)
+  If (&fb EQ &Z)
+   If (&fc EQ &Z)
+    If (&fg EQ &Z)
+     If (&fx EQ &Z)
+      If (&fh EQ &Z)
+       If (&fp EQ &Z)
+        If (&fr EQ &Z)
+         If (&fz EQ &Z)
+          If (&fbz EQ &Z)
+           If (&fbc EQ &Z)
+            If (&fbg EQ &Z)
+             If (&fbx EQ &Z)
+              If (&fhz EQ &Z)
+               If (&fpz EQ &Z)
+                If (&frz EQ &Z)
+                   If (&fzz EQ &Z)
+                      If (&fic EQ &Z)
+                          ver (&ft,nb)
+)End

@@ -1,0 +1,46 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(turq)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+)Body Expand(\\) window(77,18)
+%-\-\- ~Format ZipPDF Prompt%-\-\-
+%Command ===>_Zcmd
+`Enter/Verify
++
+` Name-in-Archive %===>_pznia                   +Name in Archive for file
+` Layout          %===>_pzlayout   +             Portrait or Landscape
+` Font size       %===>_pzfont+                  default is&df (72 = 1 inch)
++                                                use sizeB for bold (9B)
+` Paper           %===>_pzpaper+                 Letter, Legal, A4 or nnxyy
+` LPI             %===>_pzlpi+                   Lines per inch (default&dl)
++ Margins - in units of^measure
++   Left%===>_left  +Right %===>_right +
++   Top %===>_top   +Bottom%===>_bottom+
++ PDF Index       %===>_pindex               +   row/column/length
+` RPO             %===>_pzsec                +   Security (40, 128, or no)
++                                                or 40:userpw 128:userpw
+` Or TXT2PDF Configuration File:             +   Create using TXT2PDF Dialog
+  %===> _t2pconf                                          +
+)Init
+ .cursor = pznia
+ .help   = xmitiph4
+ &df = &dfsize
+ &dl = &deflpi
+ if (&pzsec = &z)
+     &pzsec = No
+ if (&metric EQ 'C')
+    &measure = Centimeters
+ if (&metric EQ 'I')
+    &measure = Inches
+)Proc
+ &pzlayout = trans(trunc(&pzlayout,1)
+            p,Portrait P,Portrait
+            l,Landscape L,Landscape *,*)
+ if (&t2pconf = &z)
+     ver (&pzlayout,nb,list,Portrait,Landscape)
+ VPut (left right top bottom)
+)End

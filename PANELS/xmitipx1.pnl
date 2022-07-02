@@ -1,0 +1,24 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(60,16) Expand(//)
+%-/-/- ~XMITIP To Address%-/-/-
++
+~The TO Address is the internet e-mail address that
+~will appear in the TO field of the e-mail.
++
+~Valid options are:
++
+`e-mail address
+`"first last" <e-mail address>
+`?~- which will bring up the address book
+`*~- when used with an AddressFile
++
+~Examples:
++
+~your.boss@company.com
+~"your boss" <your.boss@company.com>
+)Init
+ &zcont = xmitiphm
+)End

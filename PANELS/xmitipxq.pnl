@@ -1,0 +1,19 @@
+)attr default(%+_)
+  ` type(text) intens(high) caps(off) just(asis ) color(yellow)
+  ~ type(text) intens(high) caps(off) just(asis ) color(turq)
+  % type(text) intens(high)
+  $ type(output) intens(low ) caps(off) just(left ) color(yellow)
+)Body Window(50,10) Expand(\\)
+%-\-\- ~XMITIP FollowUp Settings%-\-\-
++
+~This option will allow you to set a Follow Up
+~ToDo for the e-mail if the users mail client
+~supports the iCalendar file attachments.
+`
+` Date is mmddyy (e.g. 091101)
+       or$pnn    (nn days from today)
+`
+)Init
+ &zup = xmitiph0
+ &pnn = +nn
+)End

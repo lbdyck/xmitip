@@ -1,0 +1,46 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   # type( input) intens(high) caps(off) just(left ) pad(_)
+   + type(text) intens(low) skip(on)
+   $ type(output) intens(low) caps(off) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(blue) hilite(reverse)
+   @ type(text) intens(high) color(blue)
+)Body Expand(!!)
+%-!-!- ~XMITIP Create Calendar Entry% -!-!-
+%Command ===>_zcmd
++
+  @Title:   #ictitle                                                          +
+  @Date:    _icdate  +   format mm/dd/yy or$pnn (nn days from today)
+  @Time:    _ictm+       format hhmm
+  @Duration:_icdur +     format nnH (hours) or nnM (minutes) (default is M)
+                        +if zero (0) becomes a ToDo item
+  @Location:#icloc                                                            +
+  @Text:    #ictext1                                                    +<
+            #ictext2                                                    +<
+            #ictext3                                                    +<
+            #ictext4                                                    +<
+            #ictext5                                                    +<
+            #ictext6                                                    +<
+            #ictext7                                                    +<
+            #ictext8                                                    +<
+            #ictext9                                                    +<
+            #ictexta                                                    +<
+            #ictextb                                                    +<
+%Note: lines will be merged unless you use~\n %for new line
+)Init
+ .cursor = ictitle
+ &pnn = +nn
+)Proc
+ ver (&ictitle,nb)
+ &x = trunc(&icdate,1)
+ if (&x NE +)
+    ver (&icdate,nb,pict,nn/nn/nn)
+ ver (&ictm,nb,num)
+ ver (&icdur,nb)
+ ver (&ictext1,nb)
+ Vput (ictitle icdate ictm icdur icloc) profile
+ Vput (ictext1 ictext2 ictext3 ictext4 ictext5 ictext6 ictext7) profile
+ Vput (ictext8 ictext9 ictexta ictextb) profile
+)End

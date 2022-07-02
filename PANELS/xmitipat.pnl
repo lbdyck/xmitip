@@ -1,0 +1,38 @@
+)Attr Default(%+_)
+/* % type(text  ) intens(high)              Defaults displayed for */
+/* + type(text  ) intens(low )                   information only  */
+/* _ type( input) intens(high) caps(on ) just(left )               */
+   ! type( input) intens(high) caps(on ) just(left ) pad('_')
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+   # type(output) intens(high) caps(off) just(asis ) pad(' ')
+     hilite(uscore)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ` type(text) intens(high) color(yellow)
+   + type(text) color(turq)
+   $ type(output) intens(high) color(yellow) caps(off)
+)Body  Expand(//)
+%-/-/- ~XMITIP E-Mail Address List% -/-/-
+%Command ===>_zcmd                                 / /%Scroll ===>_amt +
+%
++ Commands: `Find`Insert+`Sort+`Cancel+`SaveAF+`LoadAF+$lookup+
++or`S+Select`B+Blind Copy`C+Carbon Copy`D+Delete`I+Insert`R+Revise`U+Unselect
++  AddressFile:`L+Load`B+Browse`D+Delete`E+Edit`R+Revise`S+Select
++
+%Sel  Action   Recipients Name
++              E-Mail Address
++
+)Model
+!z+  ^z       ^z
++             #z
+)Init
+.help = xmitipah
+  .ZVARS = '(zsel lact ename eaddr)'
+  &amt = csr
+ IF (&ldap EQ 1)
+    &lookup = &z
+ ELSE
+    &lookup = LookUp
+)Reinit
+)Proc
+ ver (&zsel,list,S,B,C,D,I,R,U,L,E)
+)End

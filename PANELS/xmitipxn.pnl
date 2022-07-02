@@ -1,0 +1,16 @@
+)attr default(%+_)
+~ type(text) intens(high) caps(off) just(asis ) color(yellow)
+` type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(60,9) Expand(\\)
+%-\-\- ~XMITIP IGNORECC%-\-\-
++
+`Use this option to turn off carriage control processing
+`for the current dataset.
++
+`Valid options are:~Yes`= don't honor CC
++                  ~No `= use CC (default)
++
+)Init
+ &zup = xmitiph0
+)End

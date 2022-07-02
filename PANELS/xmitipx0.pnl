@@ -1,0 +1,19 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(56,12) Expand(//)
+%-/-/- ~XMITIP RESPOND%-/-/-
++
+~The RESPOND field contains values that will generate
+~within the HTML message text auto-reply field links.
++
+~Each value must be defined without spaces.
++
+~Examples:
++
+~ok not_ok I_Accept
+~Reject I_Do_Not_Concur
+)Init
+ &zcont = xmitiphm
+)End

@@ -1,0 +1,17 @@
+)Attr Default(%+_)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\)
+%-\-\- ~E-Mail JOB Copy %-\-\-
+%Command%===>_zcmd
++
+%    From Data Set: &XMITJCL
+%
+%    To Data Set: _XMIT2JCL
+%    (will be created if it doesn't exist)
++
+)INIT
+ .cursor = xmit2jcl
+)PROC
+  ver (&xmit2jcl,nb,dsnameq)
+)END

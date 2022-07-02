@@ -1,0 +1,15 @@
+)attr default(%+_)
+$ type(output) intens(high) caps(off) color(yellow)
+_ type(input)  intens(high) caps(off)
+~ type(text) intens(high) caps(off) color(turq)
+% type(text) intens(high)
+)Body Window(55,4) Expand(\\)
+%\-\-~XMITIPDS$xmt           ~Prompt%-\-\
++
+~Enter/Confirm the$info
+ ===>_xminfo
+)Init
+ &info = &xmt
+)Proc
+ ver (&xminfo,nb)
+)End

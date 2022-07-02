@@ -1,0 +1,17 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(56,9) Expand(\\)
+%-\-\- ~XMITIP Format Text%-\-\-
++
+~The file will be attached in plain text format.
++
+`FORMAT TXT/suffix
+~   suffix will be used if a filename is not provided,
+~          default is TXT
++
+~   e.g. FORMAT TXT/TXT
+)Init
+ &zup = xmitiph0
+)End

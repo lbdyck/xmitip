@@ -1,0 +1,24 @@
+)Attr Default(%+_)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\)
+%-\-\- ~E-Mail JOB Submit %-\-\-
+%Select Processing Option:%===>_zcmd
++
+%    B -+Browse the generated job
+%    C -+Copy to a data set
+%    E -+Edit the generated job
+%    J -+Change the JOB Statements
+%    S -+Submit the generated job
+%    X -+Execute the command under TSO
++
++    Dataset containing the generated job is:
+%    DSN=&XMITJCL
++
+)INIT
+ .cursor = zcmd
+)ReInit
+ &zcmd = &z
+)PROC
+  ver (&zcmd,list,B,C,E,S,J,X)
+)END

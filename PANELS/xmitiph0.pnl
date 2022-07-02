@@ -1,0 +1,71 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(turq)
++ type(text) intens(high) caps(off) just(asis ) color(turq)
+~ type(text) intens(high) caps(off) just(asis ) color(turq) hilite(reverse)
+# type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high) color(red)
+)Body Expand(\\)
+%\-\-~XMITIP Tutorial%-\-\
+%Selection ===>_ZCMD                                                           +
+%
+`  This ISPF Dialog provides a simple interface to the XMITIP application.
+`  The XMITIP application is a tool that can be used to send electronic mail
+`  messages#and`files as attachments to internet e-mail addresses.
+`
+`  The following topics are presented in sequence, or may be selected by
+`  number:
+`
+   %1+ Address File            %13+ Execution Mode     %25+ Priority
+   %2+ Address Conversion      %14+ Feedback           %26+ Receipt
+   %3+ Attachment Description  %15+ FollowUp           %27+ ReplyTo
+   %4+ Attachment DSN          %16+ Format             %28+ Respond
+   %5+ Attachment Name         %17+ From               %29+ Sensitivity
+   %6+ Attachment Settings     %18+ Importance         %30+ Signature DSN
+   %7+ BCC                     %19+ Margins            %31+ Subject
+   %8+ CC                      %20+ Message            %32+ To
+  % 9+ Configuration File      %21+ Murphy             %33+ ZIP Method
+  %10+ Default Settings        %22+ No Carriage CC     %34+ ZIP Password
+  %11+ Delivery Settings       %23+ NO Strip Blanks    %35+ StartTLS
+  %12+ Edit Message DSN        %24+ PDF Index          %36+ SMTPDEST
+)PROC
+     &ZSEL = TRANS( &ZCMD
+                1,xmitipxc
+                2,xmitiphm
+                3,xmitipxb
+                4,xmitipxa
+                5,xmitipxj
+                6,xmitipxt
+                7,xmitipx5
+                8,xmitipx4
+                9,xmitipxo
+               10,xmitipxs
+               11,xmitipxr
+               12,xmitipxl
+               13,xmitipxp
+               14,xmitipzf
+               15,xmitipxq
+               16,xmitipxh
+               17,xmitipx6
+               18,xmitipxe
+               19,xmitipxk
+               20,xmitipx2
+               21,xmitipxd
+               22,xmitipxn
+               23,xmitipxw
+               24,xmitipxu
+               25,xmitipxf
+               26,xmitipx8
+               27,xmitipx7
+               28,xmitipx0
+               29,xmitipxg
+               30,xmitipx9
+               31,xmitipx3
+               32,xmitipx1
+               33,xmitipxm
+               34,xmitipxi
+               35,xmitipyc
+               36,xmitipye
+                *,'?'
+                )
+     &ZUP = XMITIPH0
+)END

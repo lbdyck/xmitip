@@ -1,0 +1,21 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(71,14) Expand(\\)
+%-\-\- ~XMITIP Execution Mode%-\-\-
++
+~The Execution Mode selection defines whether to execute XMITIP
+~under ISPF or to generate JCL to execute in Batch.
+`
+` Batch~- Batch JCL and control statements will be generated. A
+~         prompting panel will be displayed allowing Browse,
+~         Edit, Copy, Submission of the JCL, or Foreground Execution.
+` Config~-Build a Configuration File
+` Debug~- Process the e-mail but instead of sending browse the
+~         generated e-mail headers and text.
+` ISPF ~- Execute as an ISPF application.
+` Prompt~- ISPF but with a prompt before sending.
+)Init
+ &zup = xmitiph0
+)End

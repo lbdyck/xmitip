@@ -1,0 +1,22 @@
+)attr default(%+_)
+  ` type(text) intens(high) caps(off) just(asis ) color(yellow)
+  ~ type(text) intens(high) caps(off) just(asis ) color(turq)
+  @ type(input) intens(high) caps(off) just(asis ) pad(_)
+  % type(text) intens(high)
+)Body Window(74,12) Expand(\\)
+%-\-\- ~XMITIP Paging Message Text%-\-\-
++Command%===>_zcmd
+
+  ~Enter the message text for the page and then press Enter
+  ~to Continue and continue the page or PF3 to Cancel.
+`
+  @pg1                                                                +
+  @pg2                                                                +
+`
+  ~Note: The two lines will be merged into a single line of text. A
+         plus will cause a full concatenation without a space.
+  ~      Quotes within the text are allowed if all the same type.
+)Init
+)Proc
+  ver (&pg1,nb)
+)End

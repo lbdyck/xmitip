@@ -1,0 +1,6 @@
+Hidden options
+
+These options are available but not documented except for here:
+
+NODISCLAIM   To prevent the disclaimer from being entered into the
+             generated e-mail.

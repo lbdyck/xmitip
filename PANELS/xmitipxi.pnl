@@ -1,0 +1,25 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(68,17) Expand(\\)
+%\-\-~XMITIP ZIPPASS Keyword%-\-\
++
+`ZIPPASS~is a password that will be used by the ZIP
+~utility to encrypt the file attachment for security.
+`
+~No blanks allowed.
+`
+`PKZIP~the supported value may be up to 64 characters.
+~
+`INFOZIP~the supported value may be up to 64 characters.
+~
+`ISPZIP~does not support this option.
+~
+`SLIKZIP~the support value may be up to 64 characters.
+~        if it starts with "aes:" then AES encryption will be used.
+~
+~This requires that the file attachment be zip'd
+)Init
+ &zup = xmitiph0
+)End

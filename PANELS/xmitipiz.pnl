@@ -1,0 +1,29 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   ` type( input) intens(high) caps(off) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   $ type(output) intens(low) color(turq)  caps(off)
+   @ type(output) intens(high) color(turq) just(right)
+)Body Expand(\\) Window(77,10)
+%-\-\- ~E-Mail ZIP Settings%-\-\-
+%Command ===>_Zcmd
++
+~Review and/or Change+
++
++ZipMethod        %===>_zipmeth        +Compression method
++ZipPass          %===>_zippass                                    + Password
++
++\ \ $ziptextc                                         + \ \
+)Init
+ .cursor = zcmd
+ if (&zipcont EQ 1)
+     &ziptextc = 'Review/Verify then press PF3 to continue'
+ if (&zipcont NE 1)
+     &ziptextc = 'Review/Verify then press ENTER or PF3 to continue'
+)Proc
+)Help
+ Field(zippass)  panel(xmitipxi)
+ Field(zipmeth)  panel(xmitipxm)
+)End

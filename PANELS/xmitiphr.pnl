@@ -1,0 +1,29 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(56,21) Expand(\\)
+%-\-\- ~XMITIP Format RTF%-\-\-
++
+~The file will be attached as an RTF attachment which
+~may be opened by most word processors.
+~
+`  FORMAT RTF/layout/font/paper/suffix/ro
+~         layout is Landscape (11x8.5)
+~                   Portrait  (8.5x11)
+~                   - default is Portrait
+~         font is a font size where 72 points
+~              is one inch (default is &df)
+~         paper is LETter for Letter (8.5 x 11)
+~                  LEGal for Legal (11x14)
+~                  A4 for A4 (European paper)
+~                  or
+~                  widthXheight (e.g. 4x6)
+~         suffix is the file attachment suffix
+~             (default is .rtf)
+~         ro is for Read Only (Yes or No)
+~or`FORMAT RTF/DS:configuration-dsname
+~or`FORMAT RTF/DD:configuration-dddname
+)Init
+ &zup = xmitiph0
+)End

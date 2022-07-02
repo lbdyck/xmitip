@@ -1,0 +1,25 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq) hilite(reverse)
+# type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(73,16) Expand(\\)
+%-\-\- ~XMITIP Format PDF Prompt Help%-\-\-
+%
+#  Everything should be self-explanatory except rpo
+`    (rpo`   read and print only security)
+`
+`Syntax rpo:userpw
+`
+`  No#         No security and user can change text with full
+#              Acrobat product
+`
+`  40+or`128#  Number of bits for the encryptions.
+`
+`  userpw#     Optional. If used is the password required
+`           #  to read the file.
+`
+`Note:#Adobe Acrobat 4.xx only supports 40-bit encryption.
+)Init
+ &zup = xmitiph0
+)End

@@ -1,0 +1,89 @@
+)Panel Keylist(ISPHelp,ISP)
+)Attr Default(%`_)
+/* _ type( input) intens(high) caps(on ) just(left )               */
+   @ type( input) intens(high) caps(on ) just(left ) pad('_') color(turq)
+   ! type(output) intens(high) caps(off) just(asis ) color(blue)
+   ~ type(text) intens(high) caps(off) just(asis ) color(turq)
+   % type(text) intens(high)
+   # area(SCRL) Extend(ON)
+)Body  Expand(\\)
+%\-\-~XMITIP File Attachment Help% -\-\
+%Command ===>_zcmd
+%
+`                                                                %Up F10 Dn F11
+#help -------------------------------------------------------------------------#
+)Area Help
+`  This table allows you to enter as many files as you like as attachments
+`  along with the file formatting information.  All files will be remembered
+`  and you can select only those file attachments that you want for the
+`  current XMITIP session.
+`
+`  Note: To update any row just move/tab the cursor to the field and overtype
+`
+`  Valid Commands are:
+`
+~  Cancel`      Cancels the current XMITIP session
+`
+~  Clear`       Clears the table of all entries
+`
+~  Find`        find the character sting entered
+`
+~  Insert`      Inserts a blank row and positions the cursor on that row.
+`
+`  Valid Line options are:
+`
+~  Select`      Select the current file to be attached
+`
+~  UnSelect`    UnSelect the current file
+`
+~  Delete`      Delete the current row from the table
+`
+~  Insert`      Insert a blank row
+`
+`  Table fields are:
+`
+~  Dsname`      The dataset name of the file to be attachment.  Use normal
+`               TSO and ISPF dataset coding conventions.
+`
+`               A dsname of *create* will be created and opened in ISPF Edit
+`
+~  Filename`    This is the name of the file that will appear in the users
+`               mailbox along with the e-mail
+`
+~  Format`      This is the format of the file attachment.
+`               enter a ? and press enter and a popup will appear to
+`               assist with filling out this field.
+`               or prefix the field with a ? to use the popup to assist
+`               with updating the current value.
+`
+~  Description` This is either the file-description (with no blanks) or
+`               file-name/file-description.
+`               e.g. report.doc/monthly-report
+`
+`               Note that the file description is used as the page title
+`               for HTML attachments.
+`
+`  Margins      The margin unit of measure is !measure
+`
+~  Left `       This is the left margin specification
+`               and is only used for RTF and PDF conversions. Default: !mleft
+`
+~  Right`       This is the right margin specification
+`               and is only used for RTF and PDF conversions. Default: !mright
+`
+~  Top  `       This is the top margin specification
+`               and is only used for RTF and PDF conversions. Default: !mtop
+`
+~  Bottom`      This is the bottom margin specification
+`               and is only used for RTF and PDF conversions. Default: !mbottom
+`
+~  PDF Index  ` This is the indexing information for a PDF attachment.
+`               The format is row/column/length (e.g. 2/2/15)
+)Init
+  .cursor = zcmd
+  if (&metric EQ 'C')
+     &measure = Centimeters
+  if (&metric EQ 'I')
+     &measure = Inches
+)Proc
+)end

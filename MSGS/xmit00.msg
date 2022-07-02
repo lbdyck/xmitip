@@ -1,0 +1,2 @@
+XMIT001  '&SMSG' .ALARM = YES
+'&LMSG'

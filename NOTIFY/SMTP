@@ -1,0 +1,105 @@
+//SMTP PROC MODULE=SMTP,DEBUG=,PARMS='NOSPIE/',SYSERR=SYSERR
+//*
+//* TCP/IP for MVS
+//* SMP/E Distribution Name: EZAEB017
+//*
+//*        5655-HAL (C) Copyright IBM Corp. 1989, 1994.
+//*        All rights reserved.
+//*        US Government Users Restricted Rights -
+//*        Use, duplication or disclosure restricted
+//*        by GSA ADP Schedule Contract with IBM Corp.
+//*        See IBM Copyright Instructions
+//*
+//* Change Activity:
+//* $P1=MV11439 HTCP310 RTPMCL: Added "NOSPIE" to PARMS list.     @P1A
+//*
+//* Turn on SMSG support
+//*
+//SETSMSG EXEC PGM=SETSMSG,PARM=ON
+//SYSPRINT DD SYSOUT=*
+//OUTPUT   DD SYSOUT=*
+//SYSIN    DD DUMMY
+//*
+//SMTP     EXEC PGM=MVPMAIN,
+//             PARM='&MODULE,PARM=&DEBUG,ERRFILE(&SYSERR),&PARMS',
+//             REGION=6144K,TIME=1440
+//STEPLIB  DD DSN=TCPIP.SEZATCP,DISP=SHR
+//SYSMDUMP DD SYSOUT=*
+//*
+//*        SYSPRINT points to a data set used for the output from
+//*        internal calls to IDCAMS.  It can be a temporary data set.
+//*
+//SYSPRINT DD SYSOUT=*
+//*
+//*        SYSERR contains runtime diagnostics from Pascal.  It can be
+//*        a data set or SYSOUT.
+//*
+//SYSERR   DD SYSOUT=*
+//*
+//*        SYSDEBUG receives output that is generated when the DEBUG
+//*        configuration statement is specified in SMTP.  It can be
+//*        a data set or SYSOUT.
+//*
+//SYSDEBUG DD SYSOUT=*
+//*
+//*        OUTPUT contains the startup and shutdown messages from SMTP.
+//*        It can be a data set or SYSOUT.
+//*
+//OUTPUT   DD SYSOUT=*
+//*
+//*        LOGFILE receives output that is generated when the LOG
+//*        configuration statement is specified in SMTP.  It can be
+//*        a data set or SYSOUT.
+//*
+//*        LOGFILE routed to OPSMVS via generic dataset interface
+//*        for automation purposes. OPSMAIN must be started first
+//*        else this procedure will 'JCL ERROR'.
+//*
+//*LOGFILE  DD SYSOUT=*
+//LOGFILE  DD SUBSYS=(OPSS,OPSDSN,PINK,SMTP)
+//*
+//*        SMTPNJE is the output of the SMTPNJE command.
+//*        Before running SMTP you should use the SMTPNJE command
+//*        to create the data set and then you can remove the
+//*        "*" from the following line to activate SMTPNJE.
+//*
+//SMTPNJE  DD DISP=SHR,DSN=TCPIP.SPRO.SMTPNJE.HOSTINFO
+//*
+//*        CONFIG points to a sample configuration data set.
+//*        Before running SMTP you should modify this file to
+//*        include parameters suitable for your installation.
+//*        Refer to the Chapter "Configuring the SMTP Server"
+//*        in the Customization and Administration Guide.
+//*
+//CONFIG   DD DISP=SHR,DSN=SYS1.TCPPARMS(SMTPCONF)
+//*
+//*        SECTABLE points to your SMTP security table data set.
+//*        If you are running with the SECURE option, this data set
+//*        will contain a list of NJE users who are authorized to
+//*        use the gateway.  Refer to the Chapter "Configuring the
+//*        SMTP Server" in the Customization and Administration Guide.
+//*        You must remove the "*" from the following line to allow
+//*        SMTP to find the data set.
+//*
+//*SECTABLE DD DSN=SMTP.SMTP.SECTABLE,DISP=SHR
+//*
+//*        SMTPRULE points to the data set containing the rewrite rules
+//*        for the header addresses. You must specify REWRITE822HEADER
+//*        YES for this data set to be read. Refer to the Chapter
+//*        "Configuring the SMTP Server" in the Customization and
+//*        Administration Guide.  You must remove the "*" from the
+//*        following line to allow SMTP to find the data set.
+//*
+//SMTPRULE DD DISP=SHR,DSN=SYS1.TCPPARMS(SMTPRULE)
+//*
+//*        SYSTCPD explicitly identifies which data set is to be
+//*        used to obtain the parameters defined by TCPIP.DATA.
+//*        The SYSTCPD DD statement should be placed in the TSO logon
+//*        procedure or in the JCL of any client or server executed
+//*        as a background task. The data set can be any sequential
+//*        data set or a member of a partitioned data set (PDS).
+//*
+//*        For more information please see "Understanding TCP/IP Data
+//*        Set Names" in the Customization and Administration Guide.
+//*
+//SYSTCPD  DD DISP=SHR,DSN=SYS1.TCPPARMS(TCPDATA)

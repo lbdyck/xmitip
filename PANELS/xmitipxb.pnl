@@ -1,0 +1,31 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Expand(\\)
+%\-\-~XMITIP Attachment Description%-\-\
++
+~This is a description of the file being attached (no blanks allowed). The
+~description will be used for the page title for HTML attachments. The
+~filename may include any/all of these variables that will be replaced:
++
+`&&cdate ~Full date`ccyymmdd            `&&mm    ~Current Month`mm
+`&&ctime ~Current time`hhmmss           `&&rc    ~Last condition code in job
+`&&date  ~Current date *                `&&rca   ~All condition codes in job
+`&&day   ~Current day of week           `&&sdate ~Current date`mmdd
+`&&edate ~European date`ddmmyy          `&&sysid ~Current system name
+`&&idate ~ISO date`ccyy-mm-dd           `&&udate ~Current date`mmddyy
+`&&jdate ~Current Julian date`yyddd     `&&userid~Current userid
+`&&job   ~Current Jobname               `&&iweek ~Current ISO week`ww~(01-53)
+`&&jobid ~Current Id`JOBnnnnn TSUnnnnn  `&&year2 ~Current year`yy
+`&&jobnum~Current Job Number`Jnnnnn     `&&year4 ~Current year`ccyy
+`&&month ~Current Month`month
+`*~For subject and MSGT &&date will be`month dd, ccyy
+  ~For all other uses it will be`yymmdd
++
+~Example:`FILEDESC Weekly-Report
++
+`Note:~not all mail clients use this feature.
+)Init
+ &zup = xmitiph0
+)End

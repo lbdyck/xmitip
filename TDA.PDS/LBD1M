@@ -1,0 +1,5 @@
+This is a sample message to be sent using the timed delivery utility
+of the XMITIP package.
+
+The utility will be scheduled by the production scheduling tool to be
+run once per day.

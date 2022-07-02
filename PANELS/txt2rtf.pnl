@@ -1,0 +1,54 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(blue) hilite(reverse)
+   ` type(text) intens(high) caps(off) just(left )
+   @ type(output) intens(high) color(blue) just(right)
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+)Body Expand(\\)
+%-\-\- ~Text-to-RTF @ver % -\-\-
+%Command ===>_Zcmd
++
++ Input Dataset    %===>$pinput
++ Output Dataset   %===>$poutput
++
+~Optional information+
+` Layout          %===>_porient           +Portrait or Landscape
+` Font size       %===>_pfont+             Font size (72 = 1 inch)
+` Paper           %===>_ppaper+            Letter, Legal, A4 or nnxyy
+` Read Only       %===>_rop+               Yes or No for Read Only
+` Carriage Control%===>_pcc +              Yes or No to force or ignore
+` Margins - in units of^measure
+`   Left%===>_pleft  `Right %===>_pright +
+`   Top %===>_ptop   `Bottom%===>_pbottom+
++
+)Init
+ .cursor = pinput
+ if (&metric NE &z)
+    &measure = Centimeters
+ if (&metric EQ &z)
+    &measure = Inches
+ &porient = trans(trunc(&porient,1)
+            p,Portrait P,Portrait
+            l,Landscape L,Landscape *,*)
+ &rop = trans(trunc(&rop,1)
+        y,Yes Y,Yes n,No N,No &z,No)
+ &pcc = trans(trunc(&pcc,1)
+        y,Yes Y,Yes n,No N,No *,*)
+)Proc
+ ver (&pinput,nb,dsname)
+ ver (&poutput,nb,dsname)
+ &porient = trans(trunc(&porient,1)
+            p,Portrait P,Portrait
+            l,Landscape L,Landscape *,*)
+ ver (&porient,nb,list,Portrait,Landscape)
+ ver (&pfont,range,1,72)
+ &rop = trans(trunc(&rop,1)
+        y,Yes Y,Yes n,No N,No *,*)
+ &pcc = trans(trunc(&pcc,1)
+        y,Yes Y,Yes n,No N,No *,*)
+ ver (&rop,nb,list,Yes,No,&z)
+ ver (&pcc,list,Yes,No)
+)End

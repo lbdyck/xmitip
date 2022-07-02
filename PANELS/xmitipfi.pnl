@@ -1,0 +1,53 @@
+)Attr Default(%+_)
+   ! type( input) intens(high) caps(on ) just(left ) pad('_')
+   $ type( input) intens(high) caps(off) just(left ) pad('_')
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+   # type(text) intens(high) caps(off) just(asis) color(yellow)
+     hilite(uscore)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ` type(text) intens(high) color(red)
+   + type(text) intens(high) color(turq)
+)Body  Expand(\\)
+%\-\-~XMITIP File Attachment%-\-\
+%Command ===>_zcmd                                 \ \%Scroll ===>_amt +
+%
++ Commands:`Find`Insert`Cancel+or`Clear
++ Line:    `S+Select `D+Delete `I+Insert `U+unSelect `or+overtype to change
++
+#Sel+ #Dsname+
+%     #Filename+(that will appear in the e-mail)
+%     #Format+(of the file attachment - use~?+for prompting)
+%     #Description+(of the file attachment - no blanks)
+%     #Left+ #Right+#Top+ #Bottom+    Margins in units of^measure
+%     #PDF Index                 +    row/column/length
+)Model
+!z+^z+$z                                                            +
++     $z                                                            +
++     $z                                                            +
++     $z                                                            +
++     $z     + +$z     + +$z     + +$z     +
++     $z                         +
+)Init
+  .help = xmitiph1
+  &zv1   = 'zsel act adsn afile aformat adesc',
+  &zv2   = 'aleft aright atop abottom apindex'
+  .zvars = '(&zv1 &zv2)'
+  &amt = csr
+  if (&metric EQ 'C')
+     &measure = Centimeters
+  if (&metric EQ 'I')
+     &measure = Inches
+)Proc
+ ver (&zsel,list,S,D,I,U)
+ if (&adsn NE *CREATE*)
+)Help
+ Field(adsn)     panel(xmitipxa)
+ Field(adesc)    panel(xmitipxb)
+ Field(afile)    panel(xmitipxj)
+ Field(aformat)  panel(xmitipxh)
+ Field(aleft)    panel(xmitipxk)
+ Field(aright)   panel(xmitipxk)
+ Field(atop)     panel(xmitipxk)
+ Field(abottom)  panel(xmitipxk)
+ Field(apindex)  panel(xmitipxu)
+)End

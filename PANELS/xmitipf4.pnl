@@ -1,0 +1,17 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(blue)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+)Body Expand(\\) window(74,6)
+%\-\-~Format Zip Prompt%-\-\
+%Command ===>_Zcmd
+`Enter/Verify
++
+` Name-in-Archive %===>_znia                    +Name in Archive for file
+)Init
+ .cursor = znia
+)Proc
+)End

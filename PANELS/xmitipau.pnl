@@ -1,0 +1,20 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+/* _ type( input) intens(high) caps(on ) just(left )               */
+   ` type( input) intens(high) caps(off) just(left) color(yellow)
+   # type( input) intens(high) caps(off) just(left) color(blue)
+   % type(text) intens(high)
+   + type(text) color(turq)
+   ~ type(text) intens(high) color(yellow)
+)Body  Expand(//)
+%-/-/- ~XMITIP E-Mail Address Revision%-/-/-
+%Command:%===>_zcmd
++
++  Enter or Revise the Name and Address
++
++     Recipients Name: `ename
++     E-Mail Address:  #eaddr
++
+)INIT
+)PROC
+)END

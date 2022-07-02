@@ -1,0 +1,32 @@
+)attr default(%+_)
+  ` type(text) intens(high) caps(off) just(asis ) color(yellow)
+  ~ type(text) intens(high) caps(off) just(asis ) color(turq)
+  % type(text) intens(high)
+)Body Expand(\\)
+%\-\-~XMITIP Subject%-\-\
++
+~The`Subject~of the message. The text may be enclosed in quotes, either
+~single (') or double ("). If either single or double quotes are in the
+~subject then either double or single quotes will be generated. If%PAGE~
+~is the only word in the Subject then the text in Message DSN will be
+~the message text and then generate a Page e-mail.
+~
+~The following special variables are allowed:
++
+`&&cdate ~Full date`ccyymmdd            `&&rca    ~All condition codes in job
+`&&date  ~Current date *                `&&sdate  ~Current date`mmdd
+`&&day   ~Current day of week           `&&sysid  ~Current system name
+`&&edate ~European date ddmmyy          `&&sysplex~Current plex name
+`&&idate ~ISO date`ccyy-mm-dd           `&&time   ~Current time`hhmmmss
+`&&jdate ~Current Julian date`yyddd     `&&udate  ~Current date`mmddyy
+`&&job   ~Current Jobname               `&&userid ~Current userid
+`&&job8  ~Padded Jobname                `&&iweek  ~Current ISO week`ww~(01-53)
+`&&jobid ~Current Job Number`JOBnnnnn   `&&iweeke ~Current ISO week`ccyy-Www-d
+`&&jobnum~Current Job Number`Jnnnnn     `&&iweekr ~Current ISO week`ccyy-Www
+`&&month ~Current Month `month          `&&year2  ~Current year `yy
+`&&mm    ~Current Month `mm             `&&year4  ~Current year `ccyy
+`&&rc    ~Last condition code in job
+`*~For Subject &&date will be`month dd, ccyy
+)Init
+ &zup = xmitiph0
+)End

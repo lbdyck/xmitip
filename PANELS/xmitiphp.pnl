@@ -1,0 +1,31 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(56,21) Expand(\\)
+%-\-\- ~XMITIP Format PDF%-\-\-
++
+~The file will be attached as a PDF attachment which
+~may be opened by the Adobe Acrobat Reader.
+~
+`  FORMAT PDF/layout/font/paper/lpi/rpo
+~         layout is Landscape (11x8.5)
+~                   Portrait  (8.5x11)
+~                   - default is Portrait
+~         font is a font size where 72 points
+~              is one inch (default is &df)
+~              use sizeB for bold (e.g. 9b)
+~         paper is LETter for Letter (8.5 x 11)
+~                  LEGal for Legal (11x14)
+~                  A4 for A4 (European paper)
+~                     (8.27 x 11.7)
+~         lpi is lines per inch (default is&dl)
+~         rpo is No or 40 or 128 for encryption)
+~      or rpo:upw where upw is user read password
++or
+`  FORMAT PDF/txt2pdf-configuration-dataset-name
+)Init
+ &df = &dfsize
+ &dl = &deflpi
+ &zup = xmitiph0
+)End

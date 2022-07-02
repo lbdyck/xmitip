@@ -1,0 +1,29 @@
+)Attr Default(%+_)
+/* % type(text  ) intens(high)              Defaults displayed for */
+/* + type(text  ) intens(low )                   information only  */
+/* _ type( input) intens(high) caps(on ) just(left )               */
+   ! type( input) intens(high) caps(on ) just(left ) pad('_')
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+   # type(output) intens(high) caps(off) just(asis ) pad(' ')
+     hilite(uscore)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ` type(text) intens(high) color(red)
+)Body Expand(//) window(60,20)
+%-/-/- ~XMITIP E-Mail Address Results% -/-/-
+%Command ===>_zcmd    / / %Scroll ===>_amt +
+%
++`S+Select to add to XMITIP Address Book
++
+%Sel  Action   Recipients Name
++              E-Mail Address
++
+)Model
+!z+  ^z       ^z
++             #z
+)Init
+  .ZVARS = '(zsel lact ename eaddr)'
+  &amt = csr
+)Reinit
+)Proc
+ ver (&zsel,list,S)
+)End

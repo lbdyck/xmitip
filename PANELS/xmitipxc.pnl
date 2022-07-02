@@ -1,0 +1,20 @@
+)attr default(%+_)
+` type(text) intens(high) caps(off) just(asis ) color(yellow)
+~ type(text) intens(high) caps(off) just(asis ) color(turq)
+% type(text) intens(high)
+)Body Window(56,12) Expand(\\)
+%-\-\- ~XMITIP AddressFile%-\-\-
++
+~Define a dataset or dataset(member) which contains an
+~Address List.
++
+~Note that when using this option you can specify *
+~in the Recipient field.
++
+~The format of the AddressFile data is:
+` *~in column 1 is a comment
+` To, Cc,~or`Bcc~in column 1-3 followed by an
+~     e-mail address
+)Init
+ &zup = xmitiph0
+)End

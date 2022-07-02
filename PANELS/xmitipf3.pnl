@@ -1,0 +1,44 @@
+)Attr Default(%+_)
+/* + type(text  ) intens(low )                   information only  */
+   _ type( input) intens(high) caps(off) just(left )
+   $ type( input) intens(high) caps(on ) just(left )
+   ` type(text) intens(high) caps(off) just(left ) color(blue)
+   % type(text) intens(high)
+   ~ type(text) intens(high) color(turq) hilite(reverse)
+   ^ type(output) intens(low ) caps(off) just(asis ) pad(' ')
+)Body Expand(\\) window(66,14)
+%\-\-~Format RTF Prompt%-\-\
+%Command ===>_Zcmd
+`Enter/Verify
++
+` Layout          %===>_rlayout    +Portrait or Landscape
+` Font size       %===>_rfont+      default is&df (72 = 1 inch)
+` Paper           %===>_rpaper+     Letter, Legal, A4 or nnxyy
+` Read Only       %===>_rop+        Yes or No for Read Only
++ Margins - in units of^measure
++   Left%===>_left  +Right %===>_right +
++   Top %===>_top   +Bottom%===>_bottom+
++
+` Or TXT2RTF Configuration File:
+  %===> $t2rconf                                          +
+)Init
+ .cursor = rlayout
+ &df = &dfsize
+ if (&metric EQ 'C')
+    &measure = Centimeters
+ if (&metric EQ 'I')
+    &measure = Inches
+ &rop = trans(trunc(&rop,1)
+        y,Yes Y,Yes n,No N,No &z,No)
+)Proc
+ &rlayout = trans(trunc(&rlayout,1)
+            p,Portrait P,Portrait
+            l,Landscape L,Landscape *,*)
+ if (&t2rconf EQ &z)
+    ver (&rlayout,nb,list,Portrait,Landscape)
+ ver (&rfont,range,1,72)
+ &rop = trans(trunc(&rop,1)
+        y,Yes Y,Yes n,No N,No *,*)
+ ver (&rop,nb,list,Yes,No)
+ ver (&t2rconf,dsnameq)
+)End
