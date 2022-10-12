@@ -1,4 +1,4 @@
-        /*%NOcomment ----------  rexx procedure  -------------------- */
+        /* --------------------  rexx procedure  -------------------- */
        /* INFOZIP alias ZIP by XMITIP, other PKZIP                   */
        /* ISPF.ISPPROF(XMIT*) keep old definitions with ISPF panels  */
        /* Delete these members to have a fresh start if @ or Ö change*/

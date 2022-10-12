@@ -15,6 +15,8 @@
          *                                                            *
          * History:                                                   *
          *                                                            *
+         *          2022-10-10 - Update TZone_NM for Australia and    *
+         *                       New Zealand (thanks to T. Liu)       *
          *          2018-01-25 - Update TZone_NM for Australia and    *
          *                       New Zealand (thanks to T. Liu)       *
          *          2017-07/26 - Add test for CSSMTP                  *
@@ -329,7 +331,7 @@
          *  Note: do NOT code the @ symbol - it will be added    *
          *        by default.                                    *
          * ----------------------------------------------------- */
-         append_domain = "21csw.com"
+         append_domain = "gmail.com"
 
         /* ----------------------------------------------------- *
          * Set to ATSIGN VALUE from SMTPCONF (Default= "@")      *
@@ -549,7 +551,7 @@
          * if the user enters FEEDBACK on the command line.        *
          * This *SHOULD* be changed.                               *
          * ------------------------------------------------------- */
-         feedback_addr = "lioneld@21csw.com"   /* 5/24/19 lbd */
+         feedback_addr = "lbdyck@gmail.com"   /* 10/10/22 lbd */
 
         /* --------------------------------------------------------- *
          * Define a default file suffix in case one is not defined   *
@@ -935,7 +937,7 @@
          * domain name of smtp server *
          * -------------------------- */
          if smtp_domain = null then
-            smtp_domain = "21csw.com"
+            smtp_domain = "gmail.com"
 
         /* --------------------------------------------------------- *
          * SMTP_Loadlib is the load library where the UDSMTP program *
@@ -1735,12 +1737,17 @@
            USA : DST ends at first sunday in november
            Europe: DST starts at last sunday in march
            Europe: DST ends at last sunday in october
+           Australia: DST starts at first sunday in october
+           Australia: DST ends at first sunday in April
            */
 
-        /* for Australia and New Zealand
-        SODST="1008"
-        EODST="0408"
-        */
+        /* for Australia and New Zealand */
+        SODST="1001"
+        EODST="0401"
+        EODSTtimechange=2                  /* DST ends at 3am  */
+        /* For USA & Europe: */
+        EODSTtimechange=1                  /* DST ends at 2am */
+
         /* For USA: */
         SODST="0315"
         EODST="1108"
@@ -1752,17 +1759,24 @@
 
         /* find start of daylight saving time */
         /* DateOfLastSundayBeforeSODST = SODST - (SODST//7+1) */
-        If SODST<EODST Then                                   /* #ANZ */
+        If SODST<EODST Then Do
         StartOfDST=DATE("S",DATE("B",thisYear""SODST,"S"),
                  -(DATE("B",thisYear""SODST,"S")//7+1),"B")
-        Else                                                  /* #ANZ */
-        StartOfDST=DATE("S",DATE("B",thisYear-1""SODST,"S"),  /* #ANZ */
-                 -(DATE("B",thisYear-1""SODST,"S")//7+1),"B") /* #ANZ */
+        Else
+        StartOfDST=DATE("S",DATE("B",thisYear-1""SODST,"S"),
+                 -(DATE("B",thisYear-1""SODST,"S")//7+1),"B")
 
         /* find end of daylight saving time */
         /* DateOfLastSundayBeforeEODST = EODST - (EODST//7+1) */
         EndOfDST=DATE("S",DATE("B",thisYear""EODST,"S"),
                  -(DATE("B",thisYear""EODST,"S")//7+1),"B")
+        End
+        Else Do
+        StartOfDST=DATE("S",DATE("B",thisYear""SODST,"S"),
+                 +(6-DATE("B",thisYear""SODST,"S")//7),"B")
+        EndOfDST=DATE("S",DATE("B",thisYear""EODST,"S"),
+                 +(6-DATE("B",thisYear""EODST,"S")//7),"B")
+        End
 
         /* determine daylight/standard time */
         today = DATE("S")
@@ -1775,10 +1789,12 @@
             if time("h") < 2 then NOP
             else zone = DayLight_Time
          if today = EndOfDST then
-            if time("h") > 1 then NOP
+            if time("h") > EODSTtimechange then NOP
             else zone = DayLight_Time
          if (today > StartOfDST & today < EndOfDST)
             then zone = DayLight_Time
+            else if (today < EndOfDST | today > StartOfDST)
+               then zone = DayLight_Time
 
         /* return the appropriate timezone offset */
         RETURN zone
