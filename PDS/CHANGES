@@ -1,5 +1,9 @@
                          XMITIP Version Change History
 
+  V23.10 - 2023-12-12
+         - exec pdates
+           XMITIP   - Add NOMSGSUM keyword
+
   V21.03 - 2022-04-20
          - panel pdates
            XMITIPXA - Document pds member mask
