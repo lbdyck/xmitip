@@ -678,7 +678,7 @@
          * msg_summary = 1 will generate the message              *
          * msg_summary = 0 will not                               *
          * ------------------------------------------------------ */
-          msg_summary = 0
+          msg_summary = 1
 
         /* ------------------------------------------------------- *
          * NullSysout defines a sysout class and goes to the bit   *

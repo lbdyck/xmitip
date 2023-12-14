@@ -1,5 +1,5 @@
         /* ---------------------  rexx procedure  ------------------- */
-        ver = "21.03"
+        ver = "23.12"
         /* Name:      XMITIP                                          *
          *                                                            *
          * Function:  Transmit a message to a user on the LAN via     *
@@ -477,6 +477,10 @@
          *              indicates that no message is being sent,      *
          *              only a file transmit is to occur.             *
          *                                                            *
+         *            NOMSGSUM                                        *
+         *              indicates that no message summary is to be    *
+         *              generated                                     *
+         *                                                            *
          *            NOSTRIP                                         *
          *              indicates that trailing blanks will NOT be    *
          *              removed from file attachments.                *
@@ -731,6 +735,8 @@
          *     udsmtp can be found at http://www.dignus.com/freebies/ *
          * ---------------------------------------------------------- *
          * History:                                                   *
+         *          2023-12-12 - 23.10                                *
+         *                     - Add NOMSGSum option                  *
          *          2021-03-25 - 21.03                                *
          *                     - Add SLK as valid format @DM03252021  *
          *          2020-08-26 - 20.08                                *
@@ -2068,6 +2074,7 @@
            Select
              When abbrev("FROM",option,2)    then call proc_from
              When abbrev("REPLYTO",option,3) then call proc_replyto
+             When abbrev("NOMSGSUM",option,6) then call proc_nomsgsum
              When option = "CONFMSG"       then call proc_confmsg
              When option = "ADDRESSFILE"   then call proc_addressfile
              When option = "AFILE"         then call proc_addressfile
@@ -7991,6 +7998,15 @@
         Proc_ASA:
            options = delword(options,1,1)
            printcc = "on"
+           return
+
+        /* -------------------------- */
+        /* NOMSGSum Keyword           */
+        /* (affects attachments only  */
+        /* -------------------------- */
+        Proc_NOMSGSUM:
+           options = delword(options,1,1)
+           msg_summary = 0
            return
 
         /* -------------------------- *
